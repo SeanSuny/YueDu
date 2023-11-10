@@ -344,7 +344,7 @@ if __name__ =='__main__':#line:397
     appToken =pushconfig ['appToken']#line:421
     threadingf =pushconfig ['threadingf']#line:422
     getmsg ()#line:423
-    txbz =3000 #line:424
+    txbz =10000 #line:424
     tl =[]#line:425
     if threadingf ==1 :#line:426
         for i in czgmconfig :#line:427
