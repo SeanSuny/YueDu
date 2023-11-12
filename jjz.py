@@ -103,7 +103,7 @@ class AutoRenewTrafficPermit(object):
                 time.sleep(300)
                 current_state, _, _, _ = self.getRemainingTime(account)
                 if current_state == "审核通过(待生效)":
-                    result_list.append("续签进京证信息成功：\n[{current_state}]")
+                    result_list.append(f"续签进京证信息成功：\n[{current_state}]")
         else:
             result_list.append(f"续签进京证信息失败：\n[{msg}]")
 
