@@ -6,23 +6,20 @@ new Env('f可乐阅读');
 1.入口,WX打开：https://rk1115131229-1322350692.cos.ap-nanjing.myqcloud.com/index.html?upuid=123182
 '''#line:7
 '''
-https://rk1116113427-1322351070.cos.ap-nanjing.myqcloud.com/index.html?upuid=123182
+1.入口,WX打开http://12318211251100.fdfogks.cn/r?upuid=123182
 若链接微信无法打开，请复制到浏览器复制新链接打开
-2.打开活动入口，抓包的任意接口cookie参数
-3.青龙环境变量菜单或者配置文件，添加本脚本环境变量
-填写变量参数时为方便填写可以随意换行
-青龙添加环境变量名称 ：klydconfig
-建议使用方式二
-方式一：青龙添加环境变量参数 ：
-单账户：[{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'}]
-多账户：[{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'},{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'}]
 
-方式二：配置文件添加
-单账户：export klydconfig="[{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'}]"
+User_Agent参数1.5f版本UA可以不用填
+由于回调服务器失效，没有key的可以临时填xxxx。
+
+2.打开活动入口，抓包的任意接口cookie参数
+3.青龙配置文件，添加本脚本环境变量
+填写变量参数时为方便填写可以随意换行
+单账户：export klydconfig="[{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'}]"
 多账户：export klydconfig="[
-{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'},
-{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'},
-{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'}
+{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'},
+{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'},
+{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'}
 ]"
 参数说明：
 name:备注名随意填写
@@ -51,288 +48,302 @@ appToken 这个是填wxpusher的appToken,找不到自己百度
 例如
 loc_push_config={"printf":0,"threadingf":1,"threadingt":3,"appToken":"xxxx"}
 loc_klydconfig=[
-{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'},
-{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'},
-{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx','User_Agent':'xxxxx'}
+{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'},
+{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'},
+{'name':'备注名','cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx','key':'xxxxxxx','uids':'xxxxxxx'}
 ]
 6.在本脚本最下方代码if __name__ == '__main__':下配置UA变量
 User-Agent参数可以抓包任意接口在headers中看到
 定时运行每半个小时一次
-'''#line:61
-import requests #line:62
-import re #line:63
-import random #line:64
-import os #line:65
-import threading #line:66
-import json #line:67
-import hashlib #line:68
-import time #line:69
-from urllib .parse import urlparse ,parse_qs #line:70
-checkDict ={'oneischeck':['第一篇文章','过检测'],}#line:73
-def getmsg ():#line:74
-    O00O0OOO0O000O000 ='v1.3f'#line:75
-    O0OOOO0O0O0O0O00O =''#line:76
-    try :#line:77
-        O00OO0O0OOO0O0000 ='http://175.24.153.42:8881/getmsg'#line:78
-        OOOOOOOOO0O00O0O0 ={'type':'zhyd'}#line:79
-        O0OOOO0O0O0O0O00O =requests .get (O00OO0O0OOO0O0000 ,params =OOOOOOOOO0O00O0O0 )#line:80
-        OOO0O000OOOOOOO00 =O0OOOO0O0O0O0O00O .json ()#line:81
-        O0000O000000O0O0O =OOO0O000OOOOOOO00 .get ('version')#line:82
-        OOOOO0OOOO000OO0O =OOO0O000OOOOOOO00 .get ('gdict')#line:83
-        O00O0OOO0O000000O =OOO0O000OOOOOOO00 .get ('gmmsg')#line:84
-        print ('系统公告:',O00O0OOO0O000000O )#line:85
-        print (f'最新版本{O0000O000000O0O0O},当前版本{O00O0OOO0O000O000}')#line:86
-        print (f'系统的公众号字典{len(OOOOO0OOOO000OO0O)}个:{OOOOO0OOOO000OO0O}')#line:87
-        print (f'本脚本公众号字典{len(checkDict.values())}个:{list(checkDict.keys())}')#line:88
-        print ('='*50 )#line:89
-    except Exception as O00O0OO000O0OO000 :#line:90
-        print (O0OOOO0O0O0O0O00O .text )#line:91
-        print (O00O0OO000O0OO000 )#line:92
-        print ('公告服务器异常')#line:93
-def push (O000000OO0O00OO0O ,OO0000O0OOO0O0O0O ,O0OOO0000O00O0O0O ,OO00O00O00OOO0OOO ,O0000O000O0O0OOOO ,OO0O0OO000OOOOOOO ):#line:94
-    O0O00000OO0OO0OOO ='''<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<title>TITLE</title>
-<style type=text/css>
-   body {
-   	background-image: linear-gradient(120deg, #fdfbfb 0%, #a5d0e5 100%);
-    background-size: 300%;
-    animation: bgAnimation 6s linear infinite;
-}
-@keyframes bgAnimation {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-</style>
-</head>
-<body>
+'''#line:59
+import requests #line:60
+import re #line:61
+import random #line:62
+import os #line:63
+import threading #line:64
+import json #line:65
+import hashlib #line:66
+import time #line:67
+from urllib .parse import urlparse ,parse_qs #line:68
+checkDict ={'onenotischeck':['第一篇文章','过检测'],}#line:71
+push_num =[1 ,2 ]#line:72
+def getmsg ():#line:73
+    OOOOOO0OOOOO0O0O0 ='v1.5f'#line:74
+    OOOOOOO000O000OO0 =''#line:75
+    try :#line:76
+        OOO00O0O00OO000O0 ='http://175.24.153.42:8881/getmsg'#line:77
+        O00OO0OO0OOO0OO0O ={'type':'zhyd'}#line:78
+        OOOOOOO000O000OO0 =requests .get (OOO00O0O00OO000O0 ,params =O00OO0OO0OOO0OO0O ,timeout =2 )#line:79
+        OO0O000O0O0OO0OOO =OOOOOOO000O000OO0 .json ()#line:80
+        O00O00OOOO0000O0O =OO0O000O0O0OO0OOO .get ('version')#line:81
+        OO00O0OO0O0O0O0OO =OO0O000O0O0OO0OOO .get ('gdict')#line:82
+        OOOO00OOO00OOOOOO =OO0O000O0O0OO0OOO .get ('gmmsg')#line:83
+        print ('系统公告:',OOOO00OOO00OOOOOO )#line:84
+        print (f'最新版本{O00O00OOOO0000O0O},当前版本{OOOOOO0OOOOO0O0O0}')#line:85
+        print (f'系统的公众号字典{len(OO00O0OO0O0O0O0OO)}个:{OO00O0OO0O0O0O0OO}')#line:86
+        print (f'本脚本公众号字典{len(checkDict.values())}个:{list(checkDict.keys())}')#line:87
+        print ('='*50 )#line:88
+    except Exception as O0OOOO000OOOOO0O0 :#line:89
+        print (O0OOOO000OOOOO0O0 )#line:90
+        print ('公告服务器异常')#line:91
+def push (OO0O000O0OOOOOO0O ,OOO0O000O00O00OOO ,OOOO000000O0O0O00 ,OOOO0O0000O0OOO00 ,O0O0OOO0OOOOO0OOO ,OO0O0O0O00OOOOOO0 ):#line:92
+    OO00OO0OO0O0OO0O0 ='''
+<body onload="window.location.href='LINK'">
 <p>TEXT</p><br>
 <p><a href="http://175.24.153.42:8882/lookstatus?key=KEY&type=TYPE">查看状态</a></p><br>
-<p><a href="http://175.24.153.42:8882/lookwxarticle?key=KEY&type=TYPE&wxurl=LINK">点击阅读检测文章</a></p><br>
 </body>
-</html>
-    '''#line:119
-    OO0O000OO0OOO00O0 =O0O00000OO0OO0OOO .replace ('TITTLE',O000000OO0O00OO0O ).replace ('LINK',OO0000O0OOO0O0O0O ).replace ('TEXT',O0OOO0000O00O0O0O ).replace ('TYPE',OO00O00O00OOO0OOO ).replace ('KEY',OO0O0OO000OOOOOOO )#line:121
-    OOOO00O00O00OO0O0 ={"appToken":appToken ,"content":OO0O000OO0OOO00O0 ,"summary":O000000OO0O00OO0O ,"contentType":2 ,"uids":[O0000O000O0O0OOOO ]}#line:128
-    O0O00OO0OOOOOO000 ='http://wxpusher.zjiecode.com/api/send/message'#line:129
-    try :#line:130
-        OOO00OO000000O0OO =requests .post (url =O0O00OO0OOOOOO000 ,json =OOOO00O00O00OO0O0 ).text #line:131
-        print (OOO00OO000000O0OO )#line:132
-        return True #line:133
-    except :#line:134
-        print ('推送失败！')#line:135
-        return False #line:136
-def getinfo (OO000O00OOO000O00 ):#line:137
-    try :#line:138
-        OOOOO0O00000OO000 =requests .get (OO000O00OOO000O00 )#line:139
-        O000O00000OO0O0O0 =re .sub ('\s','',OOOOO0O00000OO000 .text )#line:141
-        O0O00OO0O0OO0000O =re .findall ('varbiz="(.*?)"\|\|',O000O00000OO0O0O0 )#line:142
-        if O0O00OO0O0OO0000O !=[]:#line:143
-            O0O00OO0O0OO0000O =O0O00OO0O0OO0000O [0 ]#line:144
-        if O0O00OO0O0OO0000O ==''or O0O00OO0O0OO0000O ==[]:#line:145
-            if '__biz'in OO000O00OOO000O00 :#line:146
-                O0O00OO0O0OO0000O =re .findall ('__biz=(.*?)&',OO000O00OOO000O00 )#line:147
-                if O0O00OO0O0OO0000O !=[]:#line:148
-                    O0O00OO0O0OO0000O =O0O00OO0O0OO0000O [0 ]#line:149
-        OO00OOO0OO0OOOOOO =re .findall ('varnickname=htmlDecode\("(.*?)"\);',O000O00000OO0O0O0 )#line:150
-        if OO00OOO0OO0OOOOOO !=[]:#line:151
-            OO00OOO0OO0OOOOOO =OO00OOO0OO0OOOOOO [0 ]#line:152
-        O0OO00O00OO0OOO00 =re .findall ('varuser_name="(.*?)";',O000O00000OO0O0O0 )#line:153
-        if O0OO00O00OO0OOO00 !=[]:#line:154
-            O0OO00O00OO0OOO00 =O0OO00O00OO0OOO00 [0 ]#line:155
-        OOOO0O0OOOOO0O000 =re .findall ("varmsg_title='(.*?)'\.html\(",O000O00000OO0O0O0 )#line:156
-        if OOOO0O0OOOOO0O000 !=[]:#line:157
-            OOOO0O0OOOOO0O000 =OOOO0O0OOOOO0O000 [0 ]#line:158
-        O00OO0000OOOO0000 =f'公众号唯一标识：{O0O00OO0O0OO0000O}|文章:{OOOO0O0OOOOO0O000}|作者:{OO00OOO0OO0OOOOOO}|账号:{O0OO00O00OO0OOO00}'#line:159
-        print (O00OO0000OOOO0000 )#line:160
-        return OO00OOO0OO0OOOOOO ,O0OO00O00OO0OOO00 ,OOOO0O0OOOOO0O000 ,O00OO0000OOOO0000 ,O0O00OO0O0OO0000O #line:161
-    except Exception as O0000O0OOO0OOO0OO :#line:162
-        print (O0000O0OOO0OOO0OO )#line:163
-        print ('异常')#line:164
-        return False #line:165
-class WXYD :#line:166
-    def __init__ (O0OO0OO0OO00O0O00 ,O00000OO0O0OO0OO0 ):#line:167
-        O0OO0OO0OO00O0O00 .name =O00000OO0O0OO0OO0 ['name']#line:168
-        O0OO0OO0OO00O0O00 .key =O00000OO0O0OO0OO0 ['key']#line:169
-        O0OO0OO0OO00O0O00 .uids =O00000OO0O0OO0OO0 ['uids']#line:170
-        O0OO0OO0OO00O0O00 .User_Agent =O00000OO0O0OO0OO0 ['User_Agent']#line:171
-        O0OO0OO0OO00O0O00 .headers ={'Accept':'application/json, text/plain, */*','User-Agent':O0OO0OO0OO00O0O00 .User_Agent ,'Referer':'http://ab1115072245.c0722451115.ww1112001.cn/new?upuid=','Accept-Encoding':'gzip, deflate','Accept-Language':'zh-CN,zh;q=0.9','Cookie':O00000OO0O0OO0OO0 ['cookie'],}#line:179
-    def printjson (OO00O0000O00O0OO0 ,OO000OOOO000O0OO0 ):#line:180
-        if printf ==0 :#line:181
-            return #line:182
-        print (OO00O0000O00O0OO0 .name ,OO000OOOO000O0OO0 )#line:183
-    def setstatus (OO00OOO0O0O0O0O0O ):#line:184
-        try :#line:185
-            O00000OO0OOO0O00O ='http://175.24.153.42:8882/setstatus'#line:186
-            O00O000O000O0O000 ={'key':OO00OOO0O0O0O0O0O .key ,'type':'zhyd','val':'1','ven':oo0o }#line:187
-            O0O0O0OOO00O000OO =requests .get (O00000OO0OOO0O00O ,params =O00O000O000O0O000 ,timeout =10 )#line:188
-            print (OO00OOO0O0O0O0O0O .name ,O0O0O0OOO00O000OO .text )#line:189
-            if '无效'in O0O0O0OOO00O000OO .text :#line:190
-                exit (0 )#line:191
-        except Exception as OOO0OOOOO000O00O0 :#line:192
-            print (OO00OOO0O0O0O0O0O .name ,'设置状态异常')#line:193
-            print (OO00OOO0O0O0O0O0O .name ,OOO0OOOOO000O00O0 )#line:194
-    def getstatus (OO00OOOO0000OO0O0 ):#line:196
-        try :#line:197
-            O00O0O0O000O0OO0O ='http://175.24.153.42:8882/getstatus'#line:198
-            O0OO0O0OOOO00O000 ={'key':OO00OOOO0000OO0O0 .key ,'type':'zhyd'}#line:199
-            O0O00OOO0O000O0OO =requests .get (O00O0O0O000O0OO0O ,params =O0OO0O0OOOO00O000 ,timeout =3 )#line:200
-            return O0O00OOO0O000O0OO .text #line:201
-        except Exception as OOOO000O0O0O00000 :#line:202
-            print (OO00OOOO0000OO0O0 .name ,'查询状态异常',OOOO000O0O0O00000 )#line:203
-            return False #line:204
-    def tuijian (OOO0O00O00OO0O0O0 ):#line:205
-        O00OOOO000OO000OO ='http://ab1115131510.c1315101115.ww1112001.cn/tuijian'#line:206
-        O00O0000O000O0O0O =requests .get (O00OOOO000OO000OO ,headers =OOO0O00O00OO0O0O0 .headers )#line:207
+    '''#line:98
+    OO0OOO0O0O00O00OO =OO00OO0OO0O0OO0O0 .replace ('TITTLE',OO0O000O0OOOOOO0O ).replace ('LINK',OOO0O000O00O00OOO ).replace ('TEXT',OOOO000000O0O0O00 ).replace ('TYPE',OOOO0O0000O0OOO00 ).replace ('KEY',OO0O0O0O00OOOOOO0 )#line:100
+    O0OO0O0O0OO00000O ={"appToken":appToken ,"content":OO0OOO0O0O00O00OO ,"summary":OO0O000O0OOOOOO0O ,"contentType":2 ,"uids":[O0O0OOO0OOOOO0OOO ]}#line:107
+    O0O000O000OO0OO0O ='http://wxpusher.zjiecode.com/api/send/message'#line:108
+    try :#line:109
+        OOO000OOOOOO0O0OO =requests .post (url =O0O000O000OO0OO0O ,json =O0OO0O0O0OO00000O ).text #line:110
+        print ('推送结果：',OOO000OOOOOO0O0OO )#line:111
+        return True #line:112
+    except Exception as OO00O0OO0OOO0000O :#line:113
+        print ('推送失败！')#line:114
+        print ('推送结果：',OO00O0OO0OOO0000O )#line:115
+        return False #line:116
+def getinfo (OOOOOO00OO0O0O000 ):#line:117
+    try :#line:118
+        O00O0O00OO0OO0O0O =requests .get (OOOOOO00OO0O0O000 )#line:119
+        O0000OO00O0O00000 =re .sub ('\s','',O00O0O00OO0OO0O0O .text )#line:121
+        O00O0O0O00OO0O0O0 =re .findall ('varbiz="(.*?)"\|\|',O0000OO00O0O00000 )#line:122
+        if O00O0O0O00OO0O0O0 !=[]:#line:123
+            O00O0O0O00OO0O0O0 =O00O0O0O00OO0O0O0 [0 ]#line:124
+        if O00O0O0O00OO0O0O0 ==''or O00O0O0O00OO0O0O0 ==[]:#line:125
+            if '__biz'in OOOOOO00OO0O0O000 :#line:126
+                O00O0O0O00OO0O0O0 =re .findall ('__biz=(.*?)&',OOOOOO00OO0O0O000 )#line:127
+                if O00O0O0O00OO0O0O0 !=[]:#line:128
+                    O00O0O0O00OO0O0O0 =O00O0O0O00OO0O0O0 [0 ]#line:129
+        O0OO0OOOO0OOO00O0 =re .findall ('varnickname=htmlDecode\("(.*?)"\);',O0000OO00O0O00000 )#line:130
+        if O0OO0OOOO0OOO00O0 !=[]:#line:131
+            O0OO0OOOO0OOO00O0 =O0OO0OOOO0OOO00O0 [0 ]#line:132
+        OOO000O0OOOOOO0OO =re .findall ('varuser_name="(.*?)";',O0000OO00O0O00000 )#line:133
+        if OOO000O0OOOOOO0OO !=[]:#line:134
+            OOO000O0OOOOOO0OO =OOO000O0OOOOOO0OO [0 ]#line:135
+        OOOO0000O00OO00OO =re .findall ("varmsg_title='(.*?)'\.html\(",O0000OO00O0O00000 )#line:136
+        if OOOO0000O00OO00OO !=[]:#line:137
+            OOOO0000O00OO00OO =OOOO0000O00OO00OO [0 ]#line:138
+        OOOOOO00O00OO0OO0 =re .findall ("varoriCreateTime='(.*?)';",O0000OO00O0O00000 )#line:139
+        if OOOOOO00O00OO0OO0 !=[]:#line:140
+            OOOOOO00O00OO0OO0 =OOOOOO00O00OO0OO0 [0 ]#line:141
+        OO0OOOOO000OOO00O =re .findall ("varcreateTime='(.*?)';",O0000OO00O0O00000 )#line:142
+        if OO0OOOOO000OOO00O !=[]:#line:143
+            OO0OOOOO000OOO00O =OO0OOOOO000OOO00O [0 ]#line:144
+        OOO0O0000OO0OOO0O =f'公众号唯一标识：{O00O0O0O00OO0O0O0}|文章:{OOOO0000O00OO00OO}|作者:{O0OO0OOOO0OOO00O0}|账号:{OOO000O0OOOOOO0OO}|文章时间戳:{OOOOOO00O00OO0OO0}|文章时间:{OO0OOOOO000OOO00O}'#line:145
+        print (OOO0O0000OO0OOO0O )#line:146
+        print ('')#line:147
+        return O0OO0OOOO0OOO00O0 ,OOO000O0OOOOOO0OO ,OOOO0000O00OO00OO ,OOO0O0000OO0OOO0O ,O00O0O0O00OO0O0O0 ,OOOOOO00O00OO0OO0 ,OO0OOOOO000OOO00O #line:148
+    except Exception as O0OO0O0O0O0OOOO0O :#line:149
+        print (O0OO0O0O0O0OOOO0O )#line:150
+        print ('异常')#line:151
+        return False #line:152
+class WXYD :#line:153
+    def __init__ (O000OOOOOO0000O00 ,O00O0000O00O00O0O ):#line:154
+        O000OOOOOO0000O00 .name =O00O0000O00O00O0O ['name']#line:155
+        O000OOOOOO0000O00 .key =O00O0000O00O00O0O ['key']#line:156
+        O000OOOOOO0000O00 .uids =O00O0000O00O00O0O ['uids']#line:157
+        O000OOOOOO0000O00 .count =0 #line:158
+        O000OOOOOO0000O00 .User_Agent =O00O0000O00O00O0O .get ('User_Agent','xxxxxx')#line:159
+        if 'Mozilla'not in O000OOOOOO0000O00 .User_Agent :#line:160
+            print (O000OOOOOO0000O00 .name ,'UA填写有误使用默认UA,默认UA可能会运行异常')#line:161
+            O000OOOOOO0000O00 .User_Agent ='Mozilla/5.0 (iPhone; CPU iPhone OS 15_7_9 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.43(0x18002b29) NetType/WIFI Language/zh_CN'#line:162
+        O000OOOOOO0000O00 .host =O000OOOOOO0000O00 .get_host ()#line:163
+        O000OOOOOO0000O00 .headers ={'Accept':'application/json, text/plain, */*','User-Agent':O000OOOOOO0000O00 .User_Agent ,'Referer':f'{O000OOOOOO0000O00.host}/new?upuid=','Accept-Encoding':'gzip, deflate','Accept-Language':'zh-CN,zh;q=0.9','Cookie':O00O0000O00O00O0O ['cookie'],}#line:171
+    def printjson (OO0OO000O000OOOOO ,OOOOO0O000O0O00O0 ):#line:172
+        if printf ==0 :#line:173
+            return False #line:174
+        print (OO0OO000O000OOOOO .name ,OOOOO0O000O0O00O0 )#line:175
+    def setstatus (O0O00OO00OO0OOO00 ):#line:176
+        try :#line:177
+            OOOOO00OO0O00O00O ='http://175.24.153.42:8882/setstatus'#line:178
+            O000OOO0OOOOO000O ={'key':O0O00OO00OO0OOO00 .key ,'type':'zhyd','val':'1','ven':oo0o }#line:179
+            O00O0000O00OO00O0 =requests .get (OOOOO00OO0O00O00O ,params =O000OOO0OOOOO000O ,timeout =5 )#line:180
+            print (O0O00OO00OO0OOO00 .name ,O00O0000O00OO00O0 .text )#line:181
+            if '无效'in O00O0000O00OO00O0 .text :#line:182
+                exit (0 )#line:183
+        except Exception as O0OO00O0OOO000000 :#line:184
+            print (O0O00OO00OO0OOO00 .name ,'设置状态异常')#line:185
+            print (O0O00OO00OO0OOO00 .name ,O0OO00O0OOO000000 )#line:186
+            return 99 #line:187
+    def getstatus (O0O0O00O0O0O0O0O0 ):#line:189
+        try :#line:190
+            OO0O0O00OOO000OO0 ='http://175.24.153.42:8882/getstatus'#line:191
+            OOO00OO0O0000OO0O ={'key':O0O0O00O0O0O0O0O0 .key ,'type':'zhyd'}#line:192
+            O0OOO0000O0OOOO00 =requests .get (OO0O0O00OOO000OO0 ,params =OOO00OO0O0000OO0O ,timeout =3 )#line:193
+            return O0OOO0000O0OOOO00 .text #line:194
+        except Exception as O00O00O0OO0OOO0OO :#line:195
+            print (O0O0O00O0O0O0O0O0 .name ,'查询状态异常',O00O00O0OO0OOO0OO )#line:196
+            return False #line:197
+    def get_host (OOOO0O00O00000000 ):#line:198
+        OOOOO00OOO00O000O ='https://m.cdcd.plus/entry/new_ld'#line:199
+        OOO0OOO0OO0O00OO0 ={'User-Agent':OOOO0O00O00000000 .User_Agent }#line:200
+        O00O00O000OO0000O =requests .get (OOOOO00OOO00O000O ,headers =OOO0OOO0OO0O00OO0 ).json ()#line:201
+        OO00OO0O0OO00OOOO =O00O00O000OO0000O .get ('jump')#line:202
+        O0OO00OO00000O00O =urlparse (OO00OO0O0OO00OOOO ).netloc #line:203
+        return f'http://{O0OO00OO00000O00O}'#line:204
+    def tuijian (O000O0OOO0O00O0OO ):#line:205
+        O00O0OOO00O0000OO =f'{O000O0OOO0O00O0OO.host}/tuijian'#line:206
+        OOOOO000OOOO00O0O =requests .get (O00O0OOO00O0000OO ,headers =O000O0OOO0O00O0OO .headers )#line:207
         try :#line:208
-            OOO00OO0OO0OO00O0 =O00O0000O000O0O0O .json ()#line:209
-            if OOO00OO0OO0OO00O0 .get ('code')==0 :#line:210
-                OOOOO00O000O0OOOO =OOO00OO0OO0OO00O0 ['data']['user']['username']#line:211
-                O0OOO0OOOO00O00OO =float (OOO00OO0OO0OO00O0 ['data']['user']['score'])/100 #line:212
-                print (f'{OOOOO00O000O0OOOO}:当前剩余{O0OOO0OOOO00O00OO}元')#line:213
+            O0O0O0O0OO00O0OOO =OOOOO000OOOO00O0O .json ()#line:209
+            if O0O0O0O0OO00O0OOO .get ('code')==0 :#line:210
+                O00OO0OOOOO000OOO =O0O0O0O0OO00O0OOO ['data']['user']['username']#line:211
+                OOOOO0O000OO00OOO =float (O0O0O0O0OO00O0OOO ['data']['user']['score'])/100 #line:212
+                print (O000O0OOO0O00O0OO .name ,f'{O00OO0OOOOO000OOO}:当前剩余{OOOOO0O000OO00OOO}元')#line:213
                 return True #line:214
             else :#line:215
-                print (OOO00OO0OO0OO00O0 )#line:216
-                print ('账号异常0,ck可能失效')#line:217
+                print (O000O0OOO0O00O0OO .name ,O0O0O0O0OO00O0OOO )#line:216
+                print (O000O0OOO0O00O0OO .name ,'账号异常0,ck可能失效')#line:217
                 return False #line:218
-        except Exception as O00OOOO000OO0OO00 :#line:219
-            print (O00OOOO000OO0OO00 )#line:220
-            print ('账号异常1，ck可能失效')#line:221
+        except Exception as OOO0000OOO00OO00O :#line:219
+            print (O000O0OOO0O00O0OO .name ,OOO0000OOO00OO00O )#line:220
+            print (O000O0OOO0O00O0OO .name ,'账号异常1，ck可能失效')#line:221
             return False #line:222
-    def get_read_url (OO0OOO000O00O0OOO ):#line:223
-        OO00OOOOOOO0O0OOO =f'http://ab1115072245.c0722451115.ww1112001.cn/new/get_read_url'#line:224
-        O0OOO0OO000O0OO00 =requests .get (OO00OOOOOOO0O0OOO ,headers =OO0OOO000O00O0OOO .headers )#line:225
-        OOOO0O0OOOO00OOO0 =O0OOO0OO000O0OO00 .json ()#line:226
-        OOO000OOOOO0O00OO =OOOO0O0OOOO00OOO0 .get ('jump')#line:228
-        O000O0OOOO000OO0O =parse_qs (urlparse (OOO000OOOOO0O00OO ).query )#line:229
-        OO0OO00OOOOOOO000 =urlparse (OOO000OOOOO0O00OO ).netloc #line:230
-        OOO0O0OOO0OOOO0OO =O000O0OOOO000OO0O .get ('iu')[0 ]#line:231
-        O000000OO0O0OOOO0 ={'Host':OO0OO00OOOOOOO000 ,'User-Agent':OO0OOO000O00O0OOO .User_Agent ,'X-Requested-With':'XMLHttpRequest','Accept':'*/*','Referer':OOO000OOOOO0O00OO ,'Accept-Encoding':'gzip, deflate','Accept-Language':'zh-CN,zh;q=0.9',}#line:241
-        O0OOO0OO000O0OO00 =requests .get (OOO000OOOOO0O00OO ,headers =O000000OO0O0OOOO0 )#line:242
-        O000000OO0O0OOOO0 .update ({'Cookie':f'PHPSESSID={O0OOO0OO000O0OO00.cookies.get("PHPSESSID")}'})#line:243
-        return OOO0O0OOO0OOOO0OO ,OO0OO00OOOOOOO000 ,O000000OO0O0OOOO0 #line:244
-    def do_read (OOO0O0O0O00O0000O ):#line:246
-        O0O0O0OOO0O000OO0 =OOO0O0O0O00O0000O .get_read_url ()#line:247
-        OOO0O0O0O00O0000O .jkey =''#line:248
-        O0OOOO0O0OOOOO000 =0 #line:249
-        while True :#line:250
-            OOO0O0O0O00O0000O .tuijian ()#line:251
-            OOOO0O0O00OOOOO00 =f'?for=&zs=&pageshow&r={round(random.uniform(0, 1), 17)}&iu={O0O0O0OOO0O000OO0[0]}{OOO0O0O0O00O0000O.jkey}'#line:252
-            OOO00OOOOOOO0OOOO =f'http://{O0O0O0OOO0O000OO0[1]}/tuijian/do_read{OOOO0O0O00OOOOO00}'#line:253
-            print (OOO00OOOOOOO0OOOO )#line:254
-            OO0OOO0000O00OOO0 =requests .get (OOO00OOOOOOO0OOOO ,headers =O0O0O0OOO0O000OO0 [2 ])#line:255
-            print ('-'*50 )#line:257
-            OO0O000OO0O00OOO0 =OO0OOO0000O00OOO0 .json ()#line:258
-            if OO0O000OO0O00OOO0 .get ('msg'):#line:259
-                print ('弹出msg',OO0O000OO0O00OOO0 .get ('msg'))#line:260
-            OO0OOO0000000OOOO =OO0O000OO0O00OOO0 .get ('url')#line:261
-            if OO0OOO0000000OOOO =='close':#line:262
-                print (f'阅读结果：{OO0O000OO0O00OOO0.get("success_msg","开始阅读或者异常")}')#line:263
-                return True #line:264
-            if 'weixin'in OO0OOO0000000OOOO :#line:265
-                print (f'上一篇阅读结果：{OO0O000OO0O00OOO0.get("success_msg","开始阅读或者异常")}')#line:266
-                OO0O00OO0000O0000 =OO0O000OO0O00OOO0 .get ('jkey')#line:267
-                OOO0O0O0O00O0000O .jkey =f'&jkey={OO0O00OO0000O0000}'#line:268
-                OO00O0O0OO0000O0O =getinfo (OO0OOO0000000OOOO )#line:269
-                if O0OOOO0O0OOOOO000 ==0 :#line:270
-                    OO00OO00OO0000000 =list (OO00O0O0OO0000O0O )#line:271
-                    OO00OO00OO0000000 [4 ]='oneischeck'#line:272
-                    if OOO0O0O0O00O0000O .testCheck (OO00OO00OO0000000 ,OO0OOO0000000OOOO )==False :#line:273
-                        return False #line:274
-                    O0OOOO0O0OOOOO000 =1 #line:275
-                if OOO0O0O0O00O0000O .testCheck (OO00O0O0OO0000O0O ,OO0OOO0000000OOOO )==False :#line:276
-                    return False #line:277
-                print ('开始本次阅读')#line:278
-                OOO00O0OO0O000O0O =random .randint (6 ,9 )#line:279
-                print (f'本次模拟读{OOO00O0OO0O000O0O}秒')#line:280
-                time .sleep (OOO00O0OO0O000O0O )#line:281
-            else :#line:282
-                print ('未知结果')#line:283
-                print (OO0O000OO0O00OOO0 )#line:284
-                break #line:285
-    def testCheck (O0O0OOOO00OO00O00 ,OOO000O0OO0O0000O ,O0OOOOOO0OOOO0O0O ):#line:286
-        if OOO000O0OO0O0000O [4 ]==[]:#line:287
-            print (O0O0OOOO00OO00O00 .name ,'这个链接没有获取到微信号id',O0OOOOOO0OOOO0O0O )#line:288
-            return True #line:289
-        if checkDict .get (OOO000O0OO0O0000O [4 ])!=None :#line:290
-            O0O0OOOO00OO00O00 .setstatus ()#line:291
-            for OO0000OO00OO0O0O0 in range (60 ):#line:292
-                if OO0000OO00OO0O0O0 %30 ==0 :#line:293
-                    push (f'可乐阅读过检测:{O0O0OOOO00OO00O00.name}',O0OOOOOO0OOOO0O0O ,OOO000O0OO0O0000O [3 ],'zhyd',O0O0OOOO00OO00O00 .uids ,O0O0OOOO00OO00O00 .key )#line:294
-                OO000O00O000O0OOO =O0O0OOOO00OO00O00 .getstatus ()#line:295
-                if OO000O00O000O0OOO =='0':#line:296
-                    print (O0O0OOOO00OO00O00 .name ,'过检测文章已经阅读')#line:297
-                    return True #line:298
-                elif OO000O00O000O0OOO =='1':#line:299
-                    print (O0O0OOOO00OO00O00 .name ,f'正在等待过检测文章阅读结果{OO0000OO00OO0O0O0}秒。。。')#line:300
-                    time .sleep (1 )#line:301
-                else :#line:302
-                    print (O0O0OOOO00OO00O00 .name ,OO000O00O000O0OOO )#line:303
-                    print (O0O0OOOO00OO00O00 .name ,'服务器异常')#line:304
-                    return False #line:305
-            print (O0O0OOOO00OO00O00 .name ,'过检测超时中止脚本防止黑号')#line:306
-            return False #line:307
-        else :#line:308
-            return True #line:309
-    def withdrawal (O0OOOO0OO00O0OO0O ):#line:310
-        O0OOOOO00OOOO0OOO ='http://ab1115072245.c0722451115.ww1112001.cn/withdrawal'#line:311
-        O000OO0O00OO0O000 =requests .get (O0OOOOO00OOOO0OOO ,headers =O0OOOO0OO00O0OO0O .headers )#line:312
-        OO0O00OOOO0OO0O00 =O000OO0O00OO0O000 .json ()#line:313
-        time .sleep (3 )#line:314
-        if OO0O00OOOO0OO0O00 .get ('code')==0 :#line:315
-            O0O000O00OO00000O =int (float (OO0O00OOOO0OO0O00 ['data']['user']['score']))#line:316
-            if O0O000O00OO00000O >=2000 :#line:317
-                O0O000O00OO00000O =2000 #line:318
-            OO0O0O00OO0O0OOO0 =O0OOOO0OO00O0OO0O .headers .copy ()#line:319
-            OO0O0O00OO0O0OOO0 .update ({'Content-Type':'application/x-www-form-urlencoded'})#line:320
-            O0OOOOO00OOOO0OOO ='http://ab1116084433.c0844331116.ww1112004.cn/withdrawal/doWithdraw'#line:321
-            O00OO0000OO0OO00O =f'amount={O0O000O00OO00000O}&type=wx'#line:322
-            O000OO0O00OO0O000 =requests .post (O0OOOOO00OOOO0OOO ,headers =OO0O0O00OO0O0OOO0 ,data =O00OO0000OO0OO00O )#line:323
-            print ('提现结果',O000OO0O00OO0O000 .text )#line:324
-        else :#line:325
-            print (OO0O00OOOO0OO0O00 )#line:326
-    def run (OO0OO0O0000O000OO ):#line:327
-        if hashlib .md5 (oo0o .encode ()).hexdigest ()!='e00d9b235da07e11c89608f0fc8c8e36':OO0OO0O0000O000OO .setstatus ()#line:328
-        if OO0OO0O0000O000OO .tuijian ():#line:329
-            OO0OO0O0000O000OO .do_read ()#line:330
-            time .sleep (2 )#line:331
-            OO0OO0O0000O000OO .withdrawal ()#line:332
-def getEnv (O0OO000OOO0OO0O00 ):#line:333
-    OOOOO0O000000OOOO =os .getenv (O0OO000OOO0OO0O00 )#line:334
-    if OOOOO0O000000OOOO ==None :#line:335
-        print (f'{O0OO000OOO0OO0O00}青龙变量里没有获取到，使用本地参数')#line:336
-        return False #line:337
-    try :#line:338
-        OOOOO0O000000OOOO =json .loads (OOOOO0O000000OOOO .replace ("'",'"').replace ("\n","").replace (" ","").replace ("\t",""))#line:339
-        return OOOOO0O000000OOOO #line:340
-    except Exception as OO00OOO0OOO0OO0O0 :#line:341
-        print ('错误:',OO00OOO0OOO0OO0O0 )#line:342
-        print ('你填写的变量是:',OOOOO0O000000OOOO )#line:343
-        print ('请检查变量参数是否填写正确')#line:344
-        print (f'{O0OO000OOO0OO0O00}使用本地参数')#line:345
-if __name__ =='__main__':#line:346
-    loc_push_config = {"printf": 1, "threadingf": 0, "appToken": "AT_9Kxxxxu6JC"}
+    def get_read_url (OOOOOOOO0O000OO00 ):#line:223
+        O00O00000OOOOO00O =f'{OOOOOOOO0O000OO00.host}/new/get_read_url'#line:224
+        O000OO000OO00O0OO =requests .get (O00O00000OOOOO00O ,headers =OOOOOOOO0O000OO00 .headers )#line:225
+        OO000O0OO0OO0OOOO =O000OO000OO00O0OO .json ()#line:226
+        O0OO0OO00O000OOOO =OO000O0OO0OO0OOOO .get ('jump')#line:228
+        OOOO0O0O00OOOO0O0 =parse_qs (urlparse (O0OO0OO00O000OOOO ).query )#line:229
+        O0O0000O000O0OO00 =urlparse (O0OO0OO00O000OOOO ).netloc #line:230
+        O0O00O00O0O0OO00O =OOOO0O0O00OOOO0O0 .get ('iu')[0 ]#line:231
+        print (O0O00O00O0O0OO00O )#line:232
+        O0OOO00O000OO00OO ={'Host':O0O0000O000O0OO00 ,'User-Agent':OOOOOOOO0O000OO00 .User_Agent ,'X-Requested-With':'XMLHttpRequest','Accept':'*/*','Referer':O0OO0OO00O000OOOO ,'Accept-Encoding':'gzip, deflate','Accept-Language':'zh-CN,zh;q=0.9',}#line:241
+        print (O0OO0OO00O000OOOO )#line:242
+        O000OO000OO00O0OO =requests .get (O0OO0OO00O000OOOO ,headers =O0OOO00O000OO00OO )#line:243
+        O0OOO00O000OO00OO .update ({'Cookie':f'PHPSESSID={O000OO000OO00O0OO.cookies.get("PHPSESSID")}'})#line:244
+        return O0O00O00O0O0OO00O ,O0O0000O000O0OO00 ,O0OOO00O000OO00OO #line:245
+    def do_read (O00O00O0OOO0000O0 ):#line:247
+        O0O000OO00O0OO0O0 =O00O00O0OOO0000O0 .get_read_url ()#line:248
+        O00O00O0OOO0000O0 .jkey =''#line:249
+        O00OOO0OOOO0OOO0O =0 #line:250
+        while True :#line:251
+            O00O00O0OOO0000O0 .tuijian ()#line:252
+            O0O0000OO00OO00O0 =f'?for=&zs=&pageshow&r={round(random.uniform(0, 1), 17)}&iu={O0O000OO00O0OO0O0[0]}{O00O00O0OOO0000O0.jkey}'#line:253
+            O0O000O00OOO0000O =f'http://{O0O000OO00O0OO0O0[1]}/tuijian/do_read{O0O0000OO00OO00O0}'#line:254
+            O00O00O0OOO0000O0 .printjson (O0O000O00OOO0000O )#line:255
+            O0OO0OO0O0OOO00O0 =requests .get (O0O000O00OOO0000O ,headers =O0O000OO00O0OO0O0 [2 ])#line:256
+            print (O00O00O0OOO0000O0 .name ,'-'*50 )#line:257
+            print (O0OO0OO0O0OOO00O0 .text )#line:258
+            O00O00OOO0O0O0OO0 =O0OO0OO0O0OOO00O0 .json ()#line:259
+            if O00O00OOO0O0O0OO0 .get ('msg'):#line:260
+                print (O00O00O0OOO0000O0 .name ,'弹出msg',O00O00OOO0O0O0OO0 .get ('msg'))#line:261
+            O0O0000O00OOOO0OO =O00O00OOO0O0O0OO0 .get ('url')#line:262
+            O00O00O0OOO0000O0 .printjson (O0O0000O00OOOO0OO )#line:263
+            if O0O0000O00OOOO0OO =='close':#line:264
+                print (O00O00O0OOO0000O0 .name ,f'阅读结果：{O00O00OOO0O0O0OO0.get("success_msg")}')#line:265
+                return True #line:266
+            if 'weixin'in O0O0000O00OOOO0OO :#line:267
+                O00OOO0OOOO0OOO0O +=1 #line:268
+                print (O00O00O0OOO0000O0 .name ,f'上一篇阅读结果：{O00O00OOO0O0O0OO0.get("success_msg","开始阅读或者异常")}')#line:269
+                OOOO00O000000O00O =O00O00OOO0O0O0OO0 .get ('jkey')#line:270
+                O00O00O0OOO0000O0 .jkey =f'&jkey={OOOO00O000000O00O}'#line:271
+                OO0OO0O0OOOOO0OOO =getinfo (O0O0000O00OOOO0OO )#line:272
+                if O00OOO0OOOO0OOO0O in push_num :#line:273
+                    O00OOO00OO00O0O00 =list (OO0OO0O0OOOOO0OOO )#line:274
+                    O00OOO00OO00O0O00 [4 ]='oneischeck'#line:275
+                    if O00O00O0OOO0000O0 .testCheck (O00OOO00OO00O0O00 ,O0O0000O00OOOO0OO )==False :#line:276
+                        return False #line:277
+                else :#line:278
+                    if O00O00O0OOO0000O0 .testCheck (OO0OO0O0OOOOO0OOO ,O0O0000O00OOOO0OO )==False :#line:279
+                        return False #line:280
+                if O00O00O0OOO0000O0 .count >=5 :#line:282
+                    print (O00O00O0OOO0000O0 .name ,'过检测超过4次中止阅读')#line:283
+                    return False #line:284
+                OO0000000O000O0OO =random .randint (6 ,9 )#line:285
+                print (O00O00O0OOO0000O0 .name ,f'本次模拟读{OO0000000O000O0OO}秒')#line:286
+                time .sleep (OO0000000O000O0OO )#line:287
+            else :#line:288
+                print (O00O00O0OOO0000O0 .name ,'未知结果')#line:289
+                print (O00O00O0OOO0000O0 .name ,O00O00OOO0O0O0OO0 )#line:290
+                break #line:291
+    def testCheck (OO00O0OOO00OO0000 ,OO0000OOO0O0OO0OO ,OOO0OOOO0OOO00O0O ):#line:292
+        if OO0000OOO0O0OO0OO [4 ]==[]:#line:293
+            print (OO00O0OOO00OO0000 .name ,'这个链接没有获取到微信号id',OOO0OOOO0OOO00O0O )#line:294
+            return True #line:295
+        if (checkDict .get (OO0000OOO0O0OO0OO [4 ])!=None )or (int (time .time ())-int (OO0000OOO0O0OO0OO [5 ])>60 *60 *24 *30 ):#line:296
+            OO00O0OOO00OO0000 .count +=1 #line:297
+            if OO00O0OOO00OO0000 .setstatus ()==99 :#line:298
+                print (OO00O0OOO00OO0000 .name ,'过检测服务器异常，使用无回调方案，请在50s内阅读检测文章')#line:299
+                push (f'可乐阅读过检测:{OO00O0OOO00OO0000.name}',OOO0OOOO0OOO00O0O ,OO0000OOO0O0OO0OO [3 ],'zhyd',OO00O0OOO00OO0000 .uids ,OO00O0OOO00OO0000 .key )#line:300
+                time .sleep (50 )#line:301
+                return True #line:302
+            for OO0O00OO0O0OOOOO0 in range (60 ):#line:303
+                if OO0O00OO0O0OOOOO0 %30 ==0 :#line:304
+                    OO0000OOOOOOOO00O =f'http://175.24.153.42:8882/lookwxarticle?key=KEY&type=TYPE&wxurl={OOO0OOOO0OOO00O0O}'#line:305
+                    push (f'可乐阅读过检测:{OO00O0OOO00OO0000.name}',OO0000OOOOOOOO00O ,OO0000OOO0O0OO0OO [3 ],'zhyd',OO00O0OOO00OO0000 .uids ,OO00O0OOO00OO0000 .key )#line:306
+                OOO00O000O000OOOO =OO00O0OOO00OO0000 .getstatus ()#line:307
+                if OOO00O000O000OOOO =='0':#line:308
+                    print (OO00O0OOO00OO0000 .name ,'过检测文章已经阅读')#line:309
+                    return True #line:310
+                elif OOO00O000O000OOOO =='1':#line:311
+                    print (OO00O0OOO00OO0000 .name ,f'正在等待过检测文章阅读结果{OO0O00OO0O0OOOOO0}秒。。。')#line:312
+                    time .sleep (1 )#line:313
+                else :#line:314
+                    print (OO00O0OOO00OO0000 .name ,OOO00O000O000OOOO )#line:315
+                    print (OO00O0OOO00OO0000 .name ,'服务器异常')#line:316
+                    return False #line:317
+            print (OO00O0OOO00OO0000 .name ,'过检测超时中止脚本防止黑号')#line:318
+            return False #line:319
+        else :#line:320
+            return True #line:321
+    def withdrawal (OOOOOO0000O000OO0 ):#line:322
+        OOO0O0O0O00OO0O00 =f'{OOOOOO0000O000OO0.host}/withdrawal'#line:323
+        OO000OOOO0OO000OO =requests .get (OOO0O0O0O00OO0O00 ,headers =OOOOOO0000O000OO0 .headers )#line:324
+        O00O000OOOOO0000O =OO000OOOO0OO000OO .json ()#line:325
+        time .sleep (3 )#line:326
+        if O00O000OOOOO0000O .get ('code')==0 :#line:327
+            OOOOO00OOO0000O00 =int (float (O00O000OOOOO0000O ['data']['user']['score']))#line:328
+            if OOOOO00OOO0000O00 >=2000 :#line:329
+                OOOOO00OOO0000O00 =2000 #line:330
+            OO0OO0O0OO00OO000 =OOOOOO0000O000OO0 .headers .copy ()#line:331
+            OO0OO0O0OO00OO000 .update ({'Content-Type':'application/x-www-form-urlencoded'})#line:332
+            OOO0O0O0O00OO0O00 =f'{OOOOOO0000O000OO0.host}/withdrawal/doWithdraw'#line:333
+            OO0O00OO0O0O0O0O0 =f'amount={OOOOO00OOO0000O00}&type=wx'#line:334
+            OO000OOOO0OO000OO =requests .post (OOO0O0O0O00OO0O00 ,headers =OO0OO0O0OO00OO000 ,data =OO0O00OO0O0O0O0O0 )#line:335
+            print (OOOOOO0000O000OO0 .name ,'提现结果',OO000OOOO0OO000OO .text )#line:336
+        else :#line:337
+            print (OOOOOO0000O000OO0 .name ,O00O000OOOOO0000O )#line:338
+    def run (OOO00OOOOO000O00O ):#line:339
+        if hashlib .md5 (oo0o .encode ()).hexdigest ()!='e00d9b235da07e11c89608f0fc8c8e36':OOO00OOOOO000O00O .setstatus ()#line:340
+        if OOO00OOOOO000O00O .tuijian ():#line:341
+            OOO00OOOOO000O00O .do_read ()#line:342
+            time .sleep (2 )#line:343
+            OOO00OOOOO000O00O .withdrawal ()#line:344
+def getEnv (O000O0O0OO0000O00 ):#line:345
+    OOOO0O00OOOOOOOO0 =os .getenv (O000O0O0OO0000O00 )#line:346
+    if OOOO0O00OOOOOOOO0 ==None :#line:347
+        print (f'{O000O0O0OO0000O00}青龙变量里没有获取到，使用本地参数')#line:348
+        return False #line:349
+    try :#line:350
+        OOOO0O00OOOOOOOO0 =json .loads (OOOO0O00OOOOOOOO0 .replace ("'",'"').replace ("\n","").replace (" ","").replace ("\t",""))#line:351
+        return OOOO0O00OOOOOOOO0 #line:352
+    except Exception as O00OOO0OOOOOO0000 :#line:353
+        print ('错误:',O00OOO0OOOOOO0000 )#line:354
+        print ('你填写的变量是:',OOOO0O00OOOOOOOO0 )#line:355
+        print ('请检查变量参数是否填写正确')#line:356
+        print (f'{O000O0O0OO0000O00}使用本地参数')#line:357
+if __name__ =='__main__':#line:358
+    loc_push_config = {"printf": 0, "threadingf": 0, "appToken": "AT_9KCY75iQ8vL4qFkqkbHOrJxgwpxyu6JC"}
     loc_klydconfig = [
-        {'name':'备注名','cookie':'PHPSESSID=hxxxxpud; udtauth3=c2b68exk%2F0','key':'4e9b9xxxx451f2a78a','uids':'UID_11ZH0Pxxxxq12lncQ','User_Agent':'xxxxx'},
-        #{'name': '备注名', 'cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx'},
-        #{'name': '备注名', 'cookie': 'PHPSESSID=xxxx; udtauth3=a267Rxxxxx'}
+        {'name': '备注名1','cookie': 'PHPSESSID=984abblg4d47safdus6h058f2r; udtauth3=eaadRFN5fYhOJSP670thpBTlvRor3x2VfQAgUlS%2BRCRIHA9xcS6ctOt3OrkkoUE4bI0ir7PxcKZyw4VZbOozmOIaqRKPFPMlwDyUutr4qqB8guxycYXaJHrokWHBnJ5VTT3Z2cdrRPGfY45ykTkAxNEJudiuhTNlYaveV6wUH10','key': '4e9b969fd348c5e8a0cce5f451f2a78a', 'uids': 'UID_qiTw3K1TOPPsyO85poTwGbrpZOvH'},
+        # {'name':'zh','cookie':'PHPSESSID=dp1xxxxxc; udtauth3=adxxxx','key':'xxxxx','uids':'xxxx','User_Agent':'xxxxx'},
     ]
-    #--------------------------------------------------------
+    # --------------------------------------------------------
     push_config = getEnv('push_config')
     if push_config == False: push_config = loc_push_config
     print(push_config)
     klydconfig = getEnv('klydconfig')
-    if klydconfig==False:klydconfig=loc_klydconfig
+    if klydconfig == False: klydconfig = loc_klydconfig
     print(klydconfig)
-    printf = push_config.get('printf',0)  # 打印调试日志0不打印，1打印，若运行异常请打开调试
+    printf = push_config.get('printf', 0)  # 打印调试日志0不打印，1打印，若运行异常请打开调试
     appToken = push_config['appToken']  # 这个是填wxpusher的appToken
-    threadingf = push_config.get('threadingf',1)
+    threadingf = push_config.get('threadingf', 1)
     getmsg()
     if threadingf == 1:
-        tl=[]
+        tl = []
         for cg in klydconfig:
             print('*' * 50)
             print(f'开始执行{cg["name"]}')
@@ -340,7 +351,7 @@ if __name__ =='__main__':#line:346
             t = threading.Thread(target=api.run, args=())
             tl.append(t)
             t.start()
-            threadingt=push_config.get('threadingt',3)
+            threadingt = push_config.get('threadingt', 3)
             time.sleep(threadingt)
         for t in tl:
             t.join()
